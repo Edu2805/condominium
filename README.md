@@ -206,3 +206,4 @@ Software Developer
 Java | Spring Boot | Angular  
 
 Projeto desenvolvido de forma incremental, sem prazo fixo, com foco em aprendizado contínuo, boas práticas e alinhamento com padrões de mercado.
+
