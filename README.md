@@ -94,6 +94,7 @@ O projeto nasce a partir de uma necessidade real (gestão de um condomínio com 
 
 ## 🗂️ Organização do Repositório
 
+```
 condominium  
 ├── backend  
 │   ├── auth-service  
@@ -109,6 +110,7 @@ condominium
 └── .gitignore  
 
 ---
+```
 
 ## 🗄️ Banco de Dados e Migrations
 
