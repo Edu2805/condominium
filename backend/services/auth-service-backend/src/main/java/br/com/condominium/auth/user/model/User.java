@@ -22,7 +22,7 @@ import java.util.UUID;
 @Setter
 
 @Entity
-@Table(name = "users", schema = "auth")
+@Table(name = "user", schema = "auth")
 public class User {
 
     @Id

@@ -21,3 +21,6 @@ Jan 06, 2026
       - jjwt-api, jjwt-impl, jjwt-jackson
   - Ajustes de build Maven (Java release, encoding e variáveis de execução).
   - Serviço configurado para subir sem execução automática de DDL/DML (migração externa).
+
+Jan 18, 2026
+- [auth-service-feature/003] - Alteração do nome da tabela Users para User.
