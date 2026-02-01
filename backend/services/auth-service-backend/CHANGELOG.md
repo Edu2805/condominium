@@ -2,10 +2,14 @@
 
 ## Alterações não lançadas
 
-Jan 05, 2026
-- [auth-service-feature/001] - Configurações iniciais do projeto.
+Fev 01, 2026
+- [auth-service-feature/004] - Adição de dependência:
+> - `events-lib-backend` -> `1.0.0`
 
-Jan 06, 2026
+Jan 18, 2026
+- [auth-service-feature/003] - Alteração do nome da tabela Users para User.
+
+  Jan 06, 2026
 - [auth-service-feature/002] - Configuração inicial do auth-service com Spring Boot e JWT.
   - Estruturação do auth-service com Spring Boot 3.5.x.
   - Configuração de profiles (dev/prod) com uso de variáveis de ambiente.
@@ -15,12 +19,12 @@ Jan 06, 2026
   - Configuração inicial de Spring Security com autenticação via JWT.
   - Implementação da geração e validação de JWT com claims customizados (userId, tenantId, role).
   - Inclusão das dependências:
-      - spring-boot-starter-security
-      - spring-boot-starter-oauth2-resource-server
-      - spring-security-oauth2-jose
-      - jjwt-api, jjwt-impl, jjwt-jackson
+    - spring-boot-starter-security
+    - spring-boot-starter-oauth2-resource-server
+    - spring-security-oauth2-jose
+    - jjwt-api, jjwt-impl, jjwt-jackson
   - Ajustes de build Maven (Java release, encoding e variáveis de execução).
   - Serviço configurado para subir sem execução automática de DDL/DML (migração externa).
 
-Jan 18, 2026
-- [auth-service-feature/003] - Alteração do nome da tabela Users para User.
+Jan 05, 2026
+- [auth-service-feature/001] - Configurações iniciais do projeto.
