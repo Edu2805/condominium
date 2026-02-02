@@ -1,10 +1,17 @@
 package br.com.condominium.security.jwt;
 
+import java.util.Map;
+
 public interface JwtService {
 
-    String generate(JwtPayload payload);
+    String generateToken(
+            String subject,
+            Map<String, Object> claims
+    );
 
-    JwtPayload parse(String token);
+    boolean isTokenValid(String token);
 
-    boolean isValid(String token);
+    String extractSubject(String token);
+
+    Map<String, Object> extractClaims(String token);
 }

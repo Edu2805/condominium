@@ -1,62 +1,71 @@
 package br.com.condominium.security.jwt;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.time.Instant;
 import java.util.Date;
-import java.util.UUID;
+import java.util.Map;
 
+@Component
 public class DefaultJwtService implements JwtService {
 
-    private final SecretKey secretKey;
+    private final Key signingKey;
+    private final long expirationMillis;
 
-    public DefaultJwtService(String secret) {
-        this.secretKey = Keys.hmacShaKeyFor(
-                secret.getBytes(StandardCharsets.UTF_8)
-        );
+    public DefaultJwtService(
+            @Value("${security.jwt.secret}") String secret,
+            @Value("${security.jwt.expiration}") long expirationMillis
+    ) {
+        this.signingKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        this.expirationMillis = expirationMillis;
     }
 
     @Override
-    public String generate(JwtPayload payload) {
+    public String generateToken(String subject, Map<String, Object> claims) {
+        Instant now = Instant.now();
+
         return Jwts.builder()
-                .claim(JwtClaims.USER_ID, payload.userId().toString())
-                .claim(JwtClaims.TENANT_ID, payload.tenantId().toString())
-                .claim(JwtClaims.ROLE, payload.role())
-                .claim(JwtClaims.TOKEN_TYPE, payload.tokenType().name())
-                .issuedAt(Date.from(payload.issuedAt()))
-                .expiration(Date.from(payload.expiresAt()))
-                .signWith(secretKey)
+                .setSubject(subject)
+                .addClaims(claims)
+                .setIssuedAt(Date.from(now))
+                .setExpiration(Date.from(now.plusMillis(expirationMillis)))
+                .signWith(signingKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     @Override
-    public JwtPayload parse(String token) {
-        var claims = Jwts.parser()
-                .verifyWith(secretKey)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-
-        return new JwtPayload(
-                UUID.fromString(claims.get(JwtClaims.USER_ID, String.class)),
-                UUID.fromString(claims.get(JwtClaims.TENANT_ID, String.class)),
-                claims.get(JwtClaims.ROLE, String.class),
-                TokenType.valueOf(claims.get(JwtClaims.TOKEN_TYPE, String.class)),
-                claims.getIssuedAt().toInstant(),
-                claims.getExpiration().toInstant()
-        );
-    }
-
-    @Override
-    public boolean isValid(String token) {
+    public boolean isTokenValid(String token) {
         try {
-            parse(token);
+            extractAllClaims(token);
             return true;
-        } catch (Exception ex) {
+        } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
     }
-}
 
+    @Override
+    public String extractSubject(String token) {
+        return extractAllClaims(token).getSubject();
+    }
+
+    @Override
+    public Map<String, Object> extractClaims(String token) {
+        return extractAllClaims(token);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(signingKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+}
