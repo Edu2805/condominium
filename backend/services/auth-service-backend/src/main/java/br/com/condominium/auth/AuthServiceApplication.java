@@ -2,8 +2,10 @@ package br.com.condominium.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
+@Import(br.com.condominium.security.config.SecurityLibAutoConfiguration.class)
 public class AuthServiceApplication {
 
 	public static void main(String[] args) {
