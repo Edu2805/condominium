@@ -2,6 +2,14 @@
 
 ## Alterações não lançadas
 
+Fev 05, 2026
+- [auth-service-feature/005] - Adição de dependência e ajustes no AuthService:
+> - `security-lib-backend` -> `1.0.0` > `security-lib-backend` -> `1.0.1`
+
+Fev 03, 2026
+- [auth-service-feature/004] - Adição de dependência e ajustes no AuthService:
+> - `security-lib-backend` -> `1.0.0`
+
 Fev 01, 2026
 - [auth-service-feature/004] - Adição de dependência:
 > - `events-lib-backend` -> `1.0.0`

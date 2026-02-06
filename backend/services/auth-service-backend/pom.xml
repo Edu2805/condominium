@@ -98,6 +98,12 @@
 			<artifactId>events-lib-backend</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>br.com.condominium</groupId>
+			<artifactId>security-lib-backend</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
