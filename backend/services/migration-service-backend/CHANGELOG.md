@@ -1,7 +1,5 @@
 # CHANGELOG MIGRATION SERVICE BACKEND
 
-## Alterações não lançadas
-
 ### Versão
 **[0.1.0]**
 
