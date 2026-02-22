@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.condominium</groupId>
 	<artifactId>migration-service-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<name>migration-service-backend</name>
 	<description>Database migration service for Condominium platform</description>
 	<url/>

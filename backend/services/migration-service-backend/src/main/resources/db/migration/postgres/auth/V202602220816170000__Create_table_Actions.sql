@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS auth.actions (
+    id UUID PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL
+);
