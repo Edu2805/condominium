@@ -1,4 +1,4 @@
-package br.com.condominium.auth.usertenant.model;
+package br.com.condominium.auth.model.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -10,14 +10,14 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.UUID;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Embeddable
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
-
-@Embeddable
 public class UserTenantId implements Serializable {
+
     private UUID userId;
     private UUID tenantId;
 }
