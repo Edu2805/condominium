@@ -1,6 +1,13 @@
 # CHANGELOG AUTH SERVICE BACKEND
 
-## Alterações não lançadas
+### Versão
+**[0.1.0]**
+
+Fev 22, 2026
+- [auth-service-feature/007] - Criação da lógica para criação automática do usuário Admin via RabbitMQ:
+> - `spring-security-crypto` -> `6.5.7`
+> - `spring-boot-starter-amqp` -> `3.5.9`
+> - `events-lib-backend` -> `1.0.0` > `events-lib-backend` -> `2.0.0`
 
 Fev 05, 2026
 - [auth-service-feature/005] - Adição de dependência e ajustes no AuthService:
