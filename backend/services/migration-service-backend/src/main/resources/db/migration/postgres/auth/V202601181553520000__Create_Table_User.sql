@@ -1,5 +1,5 @@
 -- V2__create_users.sql
-CREATE TABLE auth.user (
+CREATE TABLE IF NOT EXISTS auth.user (
     id UUID PRIMARY KEY,
     email VARCHAR(150) NOT NULL UNIQUE,
     active BOOLEAN NOT NULL,
