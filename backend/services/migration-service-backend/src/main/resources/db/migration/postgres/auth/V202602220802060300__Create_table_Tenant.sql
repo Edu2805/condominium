@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS auth.tenant (
+    id UUID PRIMARY KEY,
+    code VARCHAR(50) NOT NULL UNIQUE
+);
