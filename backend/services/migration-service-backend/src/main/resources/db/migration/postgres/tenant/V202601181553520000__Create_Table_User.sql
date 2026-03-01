@@ -1,8 +1,8 @@
--- V2__create_users.sql
-CREATE TABLE IF NOT EXISTS auth.user (
+CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
-    active BOOLEAN NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );

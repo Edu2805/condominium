@@ -1,5 +1,7 @@
 package br.com.condominium.migration.tenant.service;
 
+import br.com.condominium.migration.orchestrator.MigrationOrchestrator;
+import br.com.condominium.migration.tenant.enums.TenantStatusType;
 import br.com.condominium.migration.tenant.event.TenantProvisioned;
 import br.com.condominium.migration.tenant.model.Tenant;
 import br.com.condominium.migration.tenant.repository.TenantRepository;
@@ -23,6 +25,7 @@ public class TenantProvisionService {
     private final TenantRepository tenantRepository;
     private final RabbitTemplate rabbitTemplate;
     private final DataSource dataSource;
+    private final MigrationOrchestrator migrationOrchestrator;
 
     @Transactional
     public void provision(String code) {
@@ -35,12 +38,14 @@ public class TenantProvisionService {
         String schemaName = "condominium_" + code;
 
         createSchema(schemaName);
-        runMigrations(schemaName);
+
+        migrationOrchestrator.migrateTenant(schemaName);
 
         Tenant tenant = Tenant.builder()
                 .id(tenantId)
                 .code(code)
                 .schemaName(schemaName)
+                .status(TenantStatusType.ACTIVE)
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -53,20 +58,11 @@ public class TenantProvisionService {
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            stmt.execute("CREATE SCHEMA IF NOT EXISTS ".concat(schemaName));
+            stmt.execute("CREATE SCHEMA IF NOT EXISTS " + schemaName);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private void runMigrations(String schemaName) {
-
-        Flyway.configure()
-                .dataSource(dataSource)
-                .schemas(schemaName)
-                .load()
-                .migrate();
     }
 
     private void publishProvisionedEvent(UUID tenantId, String code) {

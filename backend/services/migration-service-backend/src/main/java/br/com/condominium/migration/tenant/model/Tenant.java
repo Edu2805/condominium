@@ -1,5 +1,6 @@
 package br.com.condominium.migration.tenant.model;
 
+import br.com.condominium.migration.tenant.enums.TenantStatusType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tenant", schema = "auth")
+@Table(name = "tenants")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,4 +34,7 @@ public class Tenant {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private TenantStatusType status;
 }

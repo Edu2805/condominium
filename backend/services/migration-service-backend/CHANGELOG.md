@@ -1,6 +1,11 @@
 # CHANGELOG MIGRATION SERVICE BACKEND
 
 ### Versão
+**[1.0.0]**
+
+Fev 22, 2026
+- [migration-service-backend-0003] - Refatoração da estrutura de migrações para separar as tabelas por schemas.
+
 **[0.2.0]**
 
 Fev 22, 2026

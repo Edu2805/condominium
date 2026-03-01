@@ -14,7 +14,7 @@ Ele foi projetado para garantir:
 
 ## 🎯 Responsabilidades
 
-- Criar schemas por domínio (ex: `auth`, `tenant_x`, etc)
+- Criar schemas por domínio (ex: `shared`, `tenant_x`, etc)
 - Executar migrations versionadas
 - Reparar histórico de migrations quando necessário
 - Preparar a base para novos tenants
@@ -60,8 +60,8 @@ migration-service-backend
 ```
 src/main/resources
  └── db/migration
-     └── auth
-         ├── V1__create_auth_schema.sql
+     └── shared
+         ├── V1__create_shared_schema.sql
          ├── V2__create_users.sql
          └── ...
 ```
